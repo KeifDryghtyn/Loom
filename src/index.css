@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+
+@theme {
+  --color-brand: #0f172a; /* slate-900 */
+  --color-accent: #2563eb; /* blue-600 */
+  --color-insights: #4f46e5; /* indigo-600 */
+  --color-surface: #ffffff;
+  --color-background: #f8fafc; /* slate-50 */
+  --color-border: #e2e8f0; /* slate-200 */
+}
+
+@layer base {
+  body {
+    @apply bg-background text-slate-900 antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400;
+}
+
+.bg-dot-pattern {
+  background-size: 32px 32px;
+  background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1px);
+}

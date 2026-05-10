@@ -1,0 +1,75 @@
+{
+  "entities": {
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "A collection of visualization widgets organized in a layout.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "userId": { "type": "string" },
+        "sharedWith": { "type": "array", "items": { "type": "string" } },
+        "isPublic": { "type": "boolean" },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["line", "bar", "pie", "scatter", "card"] },
+              "title": { "type": "string" },
+              "datasetId": { "type": "string" },
+              "config": { "type": "object" },
+              "layout": { "type": "object" }
+            }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "userId", "widgets"]
+    },
+    "dataset": {
+      "title": "Dataset",
+      "description": "Data uploaded by a user for visualization.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "userId": { "type": "string" },
+        "data": { "type": "array", "items": { "type": "object" } },
+        "columns": { "type": "array", "items": { "type": "string" } },
+        "metadata": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "userId", "data", "columns"]
+    },
+    "analysis": {
+      "title": "AI Analysis",
+      "description": "AI-generated insights for a dataset.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "datasetId": { "type": "string" },
+        "report": { "type": "string" },
+        "summary": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["datasetId", "report"]
+    }
+  },
+  "firestore": {
+    "/dashboards/{dashboardId}": {
+      "schema": "dashboard",
+      "description": "User created dashboards."
+    },
+    "/datasets/{datasetId}": {
+      "schema": "dataset",
+      "description": "Uploaded data tables."
+    },
+    "/analyses/{analysisId}": {
+      "schema": "analysis",
+      "description": "AI generated reports for data."
+    }
+  }
+}
